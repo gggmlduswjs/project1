@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>장바구니 페이지</title>
+    <style>
+        /*임의 지정*/
+        body {
+            background-color: #f3f4f6;
+        }
+
+        header {
+            height: 90px;
+            border: 1px solid black;
+        }
+
+        section {
+            border: 1px solid black;
+            width: 100%;
+        }
+
+        .cart-menu {
+            border: 1px solid black;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .cart-menu-item {
+            list-style: none;
+            display: flex;
+        }
+
+        .cart-menu-item li {
+            margin-right: 20px;
+        }
+
+        .cart-menu-item button {
+            border: none;
+            font-size: 19px;
+            padding: 9px 20px;
+            cursor: pointer;
+            color: #8c8989;
+            background-color: transparent;
+
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .cart-menu-item button:focus {
+            color: black;
+            background-color: #cecece;
+            border-radius: 12px;
+        }
+
+        .cart-menu-item span {
+            color: red;
+            position: absolute;
+            top: 0;
+            right: 7px;
+        }
+
+        .cart-close {
+            width: 25px;
+            height: 25px;
+            background-image: url(./assets/icons/cart-close.png);
+            background-position: center;
+            background-size: cover;
+            position: absolute;
+            right: 20px;
+        }
+
+        .cart-wrap {
+            border: 1px solid rgb(198, 55, 55);
+            height: 600px;
+            margin-top: 50px;
+        }
+
+        /*자바스크립트 css*/
+        .item-img {
+            width: 200px;
+            height: 200px;
+        }
+
+        .item-li {
+            list-style: none;
+        }
+    </style>
+    <script>
+        const products = [  // 위시리스트에서 사용하기 위해 전역변수로 사용
+            {
+                img: "./assets/products/product1.jpg",
+                title: "레이디 랭 RC3",
+                price: 289000         //계산용
+            },
+            {
+                img: "./assets/products/product2.jpg",
+                title: "뉴허 01",
+                price: 289000
+            },
+            {
+                img: "./assets/products/product3.jpg",
+                title: "로로에 01(BR)",
+                price: 289000
+            }
+        ];
+
+    </script>
+</head>
+
+<body>
+    <header>header</header>
+    <section>
+        <!--메뉴-->
+        <div class="cart-menu">
+            <ul class="cart-menu-item">
+                <li>
+                    <button onclick="cartProduct()">쇼핑백<span class="count">0</span></button>
+                </li>
+                <li>
+                    <button>위시리스트<span>0</span></button>
+                </li>
+            </ul>
+            <a href="" class="cart-close"></a>
+        </div>
+
+        <!--장바구니 클릭 시 장바구니 전체(상품 리스트, 결제정보)-->
+        <div class="cart-wrap">
+            <!--리스트-->
+            <div class="cart-list">
+                <ul>
+                    <!--이미지, 상품명, 금액-->
+                </ul>
+            </div>
+            <!--결제정보-->
+            <div class="cart-buy"></div>
+        </div>
+
+        <!--위시리스트 클릭 시-->
+        <div class="wishlist-wrap">
+
+        </div>
+
+
+    </section>
+</body>
+
+</html>
