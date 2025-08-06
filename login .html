@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>로그인&회원가입 - Gentlemonster</title>
+  <style>
+    body {
+      background: #fafbfc;
+      font-family: 'Noto Sans KR', Arial, sans-serif;
+    }
+
+    .container {
+      width: 440px;
+      margin: 50px auto;
+      background: #fff;
+      border: 2px solid #888;
+      border-radius: 18px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+      padding: 25px 30px 14px 30px;
+    }
+
+    .login-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 34px;
+    }
+
+
+
+    .login-btn {
+      padding: 8px 18px;
+      background: #f4fbff;
+      border: 1.5px solid #7ebef1;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 15px;
+      cursor: pointer;
+
+    }
+
+
+    .logo img.gentle-logo {
+      height: 15px;
+      vertical-align: middle;
+    }
+
+
+
+    /* 섹션 스타일 */
+
+    .login-section {
+      padding: 14px 0 0 0;
+      border: 1.5px solid #bbb;
+      border-radius: 13px;
+      background: #fff;
+
+    }
+
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 30px 24px 0 24px;
+    }
+
+    .login-form input {
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 13px;
+      border: 1.5px solid #bbb;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .login-form input:focus {
+      border-color: #2497f2;
+    }
+
+    .btn-login {
+      height: 40px;
+      border-radius: 13px;
+      border: none;
+      background: #e6e7e9;
+      font-weight: 700;
+      font-size: 17px;
+      cursor: pointer;
+      margin-bottom: 6px;
+    }
+
+
+
+    .login-msg {
+      height: 20px;
+      color: #d72d2d;
+      font-size: 14px;
+      padding-top: 2px;
+      text-align: center;
+    }
+
+    .login-links {
+      display: flex;
+      justify-content: space-around;
+      margin: 23px 0 20px 0;
+      border-radius: 8px;
+    }
+
+    .login-links a {
+      color: #222;
+      text-decoration: none;
+      font-size: 15px;
+      padding: 2px 9px;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+
+    .login-links a:hover {
+      background: #e8e8e8;
+    }
+
+    .social-login {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      padding: 0 24px 25px 24px;
+    }
+
+
+
+    .btn-naver,
+    .btn-google {
+      position: relative;
+      height: 44px;
+      border-radius: 13px;
+      border: 1.5px solid #bbb;
+      background: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: 500;
+      width: 100%;
+      display: block;
+      padding-left: 52px;
+      /* 왼쪽 패딩(로고 들어갈 공간) */
+      text-align: center;
+      /* 텍스트 중앙정렬 */
+      box-sizing: border-box;
+    }
+
+
+
+    .sns-logo {
+      position: absolute;
+      left: 20px;
+      /* 버튼 안에서 왼쪽에서 20px 떨어진 곳에 로고 */
+      top: 50%;
+      transform: translateY(-50%);
+      height: 22px;
+      width: 28px;
+      object-fit: contain;
+      margin: 0;
+      padding: 0;
+      display: block;
+      background: none;
+      border: none;
+      box-shadow: none;
+      pointer-events: none;
+      /* 로고 클릭 방지 */
+    }
+
+    .login-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1.5px solid #bbb;
+      padding: 19px 0 5px 0;
+      margin-top: 38px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .login-msg {
+      height: 20px;
+      color: #d72d2d;
+      /* 실패시 빨간색 */
+      font-size: 14px;
+      padding-top: 2px;
+      text-align: center;
+    }
+  </style>
+  <script>
+    // DEMO용 하드코딩(실서비스에서는 DB연동)
+    const validId = "gentleman";
+    const validPw = "1234abcd";
+
+    window.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('loginForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const id = document.getElementById('userid').value.trim();
+        const pw = document.getElementById('userpw').value.trim();
+        const msg = document.getElementById('login-msg');
+
+        // 유효성 검사
+        if (id === "" || pw === "") {
+          msg.textContent = "아이디와 비밀번호를 모두 입력하세요.";
+          msg.style.color = "#d72d2d";
+          return;
+        }
+
+        // 아이디/비번 일치
+        if (id === validId && pw === validPw) {
+          msg.textContent = "로그인 성공!";
+          msg.style.color = "#188f19";
+          // 실제 서비스에선 이동, 세션 처리 등 추가
+        } else {
+          msg.textContent = "아이디 또는 비밀번호가 올바르지 않습니다.";
+          msg.style.color = "#d72d2d";
+        }
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <!-- 전체박스 -->
+  <div class="container">
+    <!-- header -->
+    <header class="login-header">
+      <button class="login-btn">로그인/회원가입</button>
+      <span class="logo">
+        <!-- Gentlemonster 로고 -->
+        <img src="./assets/logo/logo2.png" alt="Gentlemonster logo" class="gentle-logo">
+      </span>
+    </header>
+
+
+
+    <!-- section -->
+    <section class="login-section">
+      <form class="login-form" id="loginForm" autocomplete="off">
+        <input type="text" id="userid" placeholder="id" autocomplete="username">
+        <input type="password" id="userpw" placeholder="pw" autocomplete="current-password">
+        <button type="submit" class="btn-login">login</button>
+        <div id="login-msg" class="login-msg"></div>
+      </form>
+      <div class="login-links">
+        <a href="./signup.html">회원가입</a>
+        <a href="#">아이디찾기</a>
+        <a href="#">비밀번호 찾기</a>
+      </div>
+      <div class="social-login">
+        <button type="button" class="btn-naver">
+          <img src="./assets/login_logo/naver2.png" alt=" alt=" 네이버 로고" class="sns-logo">
+          네이버로 로그인
+        </button>
+        <button type="button" class="btn-google">
+          <img src="./assets/login_logo/google.png" alt="구글 로고" class="sns-logo">
+          구글로 로그인
+        </button>
+      </div>
+    </section>
+
+    <!-- 섹션 -->
+
+
+    <!-- footer -->
+    <footer class="login-footer">
+      <div class="service-info">
+        고객 서비스<br>
+        국가: South Korea
+      </div>
+      <div class="copyright">
+        &copy; 2025 GENTLE MONSTER
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
