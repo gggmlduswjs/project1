@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>회원가입</title>
+  <style>
+    body {
+      background: #fafbfc;
+      font-family: 'Noto Sans KR', Arial, sans-serif;
+    }
+
+    .signup-container {
+      width: 380px;
+      margin: 40px auto;
+      background: #fff;
+      border: 1.5px solid #aaa;
+      border-radius: 13px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+      padding: 35px 32px 20px 32px;
+    }
+
+    .signup-container h2 {
+      text-align: center;
+      margin-bottom: 26px;
+    }
+
+    .signup-container label {
+      display: block;
+      margin-bottom: 18px;
+      font-size: 15px;
+    }
+
+    .signup-container input[type="text"],
+    .signup-container input[type="email"],
+    .signup-container input[type="password"],
+    .signup-container input[type="tel"] {
+      width: 100%;
+      height: 36px;
+      padding: 0 12px;
+      border-radius: 8px;
+      border: 1.2px solid #bbb;
+      font-size: 15px;
+      margin-top: 4px;
+      box-sizing: border-box;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn-dup-check {
+      padding: 7px 13px;
+      border: 1px solid #009688;
+      background: #e9f7f6;
+      color: #009688;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .agree-row {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 18px;
+      font-size: 14px;
+    }
+
+    .signup-msg {
+      min-height: 18px;
+      color: #d72d2d;
+      font-size: 14px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .signup-msg.success {
+      color: #188f19;
+    }
+
+    .btn-signup {
+      width: 100%;
+      height: 42px;
+      border-radius: 8px;
+      border: none;
+      background: #2b8fee;
+      color: #fff;
+      font-weight: bold;
+      font-size: 17px;
+      margin-top: 6px;
+      cursor: pointer;
+    }
+
+    .btn-signup:active {
+      background: #1862b5;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="signup-container">
+    <h2>회원가입</h2>
+    <form id="signupForm" autocomplete="off">
+      <label>이름
+        <input type="text" id="signup-name" placeholder="이름을 입력하세요">
+      </label>
+      <label>아이디(이메일)
+        <div class="input-row">
+          <input type="email" id="signup-email" placeholder="이메일을 입력하세요">
+          <button type="button" class="btn-dup-check" id="dupBtn">중복확인</button>
+        </div>
+      </label>
+      <label>비밀번호
+        <input type="password" id="signup-pw" placeholder="영문/숫자/특수문자 8자 이상">
+      </label>
+      <label>비밀번호 확인
+        <input type="password" id="signup-pw2" placeholder="비밀번호를 다시 입력">
+      </label>
+      <label>전화번호
+        <input type="tel" id="signup-tel" placeholder="010-0000-0000">
+      </label>
+      <label class="agree-row">
+        <input type="checkbox" id="signup-agree">
+        <span>(필수) 이용약관 동의</span>
+      </label>
+      <div id="signup-msg" class="signup-msg"></div>
+      <button type="submit" class="btn-signup">회원가입</button>
+    </form>
+  </div>
+  <script>
+    // 중복확인 (실제 서비스라면 서버에서 검사)
+    document.getElementById('dupBtn').addEventListener('click', function () {
+      const email = document.getElementById('signup-email').value.trim();
+      if (!email) {
+        alert('이메일을 입력하세요!');
+        return;
+      }
+      // 예시: "test@test.com"이 이미 존재한다고 가정
+      if (email === "test@test.com") {
+        alert('이미 사용중인 이메일입니다.');
+      } else {
+        alert('사용 가능한 이메일입니다.');
+      }
+    });
+
+    document.getElementById('signupForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('signup-name').value.trim();
+      const email = document.getElementById('signup-email').value.trim();
+      const pw = document.getElementById('signup-pw').value;
+      const pw2 = document.getElementById('signup-pw2').value;
+      const tel = document.getElementById('signup-tel').value.trim();
+      const agree = document.getElementById('signup-agree').checked;
+      const msg = document.getElementById('signup-msg');
+      msg.classList.remove('success');
+
+      // 1. 빈 칸 검사
+      if (!name || !email || !pw || !pw2) {
+        msg.textContent = "모든 필수 항목을 입력하세요.";
+        return;
+      }
+      // 2. 이메일 형식 검사
+      if (!/^[\w\-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+        msg.textContent = "유효한 이메일 주소를 입력하세요.";
+        return;
+      }
+      // 3. 비밀번호 규칙 검사 (영문/숫자/특수문자, 8자 이상)
+      if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*()_+[\]{};':"\\|,.<>/?]).{8,}$/.test(pw)) {
+        msg.textContent = "비밀번호는 영문, 숫자, 특수문자 포함 8자 이상이어야 합니다.";
+        return;
+      }
+      // 4. 비밀번호 일치 검사
+      if (pw !== pw2) {
+        msg.textContent = "비밀번호가 일치하지 않습니다.";
+        return;
+      }
+      // 5. 약관동의 체크
+      if (!agree) {
+        msg.textContent = "이용약관에 동의해야 가입이 가능합니다.";
+        return;
+      }
+
+      // 6. 성공
+      msg.textContent = "회원가입 성공!";
+      msg.classList.add('success');
+      // 여기서 실제 서비스라면 서버에 데이터 전송(ajax, fetch 등)
+      // 폼 초기화 등 후처리 추가 가능
+    });
+  </script>
+</body>
+
+</html>
