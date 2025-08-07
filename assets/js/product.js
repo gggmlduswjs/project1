@@ -1,0 +1,126 @@
+const nav = document.querySelector('.category-wrap');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 0) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        // 상품 데이터 배열
+        const products = [
+            { name: '던스 01', price: '₩340,000', img: './assets/products/product8.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113, 43, 43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0, 0, 109) 50%, rgb(181, 181, 64) 50%)', 'black'] },
+            { name: '코코아 01GD', price: '₩330,000', img: './assets/products/product2.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113, 43, 43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0, 0, 109) 50%, rgb(181, 181, 64) 50%)', 'black'] },
+            { name: '지젤 01', price: '₩300,000', img: 'assets/products/product3.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '뱀프 GC12', price: '₩340,000', img: 'assets/products/product4.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '브리즈비 01(BR)', price: '₩279,000', img: 'assets/products/product5.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '데이즈 데이 01(V)', price: '₩340,000', img: 'assets/products/product6.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '누메르 01(BLG)', price: '₩279,000', img: 'assets/products/product7.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '바이로우 01', price: '₩289,000', img: 'assets/products/product1.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '블루모 01(OR)', price: '₩279,000', img: 'assets/products/product9.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '마이 미 01', price: '₩295,000', img: 'assets/products/product10.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '뉴 허 01', price: '₩289,000', img: 'assets/products/product11.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)'] },
+            { name: '레이디 랭 RC3', price: '₩289,000', img: 'assets/products/product12.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)'] },
+            { name: '피아나 01(G)', price: '₩295,000', img: 'assets/products/product13.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '로로에 01(BR)', price: '₩289,000', img: 'assets/products/product14.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '주드 01(GR)', price: '₩279,000', img: 'assets/products/product15.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '멜로즈 01', price: '₩340,000', img: 'assets/products/product16.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '소소모 G12', price: '₩345,000', img: 'assets/products/product17.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '몬드 G17', price: '₩345,000', img: 'assets/products/product18.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '이온 W2', price: '₩340,000', img: 'assets/products/product19.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '쿤스트 01GD', price: '₩350,000', img: 'assets/products/product20.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '다다 01(G)', price: '₩340,000', img: 'assets/products/product21.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '벤벤 G13', price: '₩340,000', img: 'assets/products/product22.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '보이드 GC10', price: '₩340,000', img: 'assets/products/product23.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '바이 01', price: '₩279,000', img: 'assets/products/product24.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '피노 01(BR)', price: '₩269,000', img: 'assets/products/product25.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '누보 G3', price: '₩259,000', img: 'assets/products/product26.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '디어 01', price: '₩289,000', img: 'assets/products/product27.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '나비 BRC11', price: '₩300,000', img: 'assets/products/product28.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '호보 W2', price: '₩300,000', img: 'assets/products/product29.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '로코코 01', price: '₩330,000', img: 'assets/products/product30.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '제이드 01(B)', price: '₩279,000', img: 'assets/products/product31.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] },
+            { name: '릴리트 01(BR)', price: '₩269,000', img: 'assets/products/product32.jpg', colors: ['linear-gradient(-45deg, gray 50%, black 50%)', 'linear-gradient(-45deg, rgb(113,43,43) 50%, black 50%)', 'linear-gradient(-45deg, rgb(0,0,109) 50%, rgb(181,181,64) 50%)', 'black'] }
+        ];
+
+        const container = document.querySelector('.product-wrap-list');
+        const loadMoreBtn = document.getElementById('load-more');
+        const countText = document.getElementById('product-count');
+        let itemsToShow = 8;
+        const totalItems = products.length;
+
+        function renderProducts() {
+            container.innerHTML = '';
+            products.slice(0, itemsToShow).forEach(prod => {
+                const item = document.createElement('div');
+                item.className = 'product-item';
+                item.innerHTML = `
+            <a href="./product_item.html" style="text-decoration: none; color: inherit;">
+                <div class="list-img">
+                    <img src="${prod.img}" alt="${prod.name}">
+                </div>
+                <div class="list-name">
+                    <div class="list-name-wrap">
+                        <p>${prod.name}</p>
+                        <p>${prod.price}</p>
+                    </div>
+                    <img src="assets/icons/즐겨찾기1.png" alt="즐겨찾기 아이콘" class="bookmark" onclick="event.preventDefault(); toggleBookmark(this);">
+                </div>
+                <div class="list-color">
+                    ${prod.colors.map(c => `<button style="background:${c};" onclick="event.preventDefault();"></button>`).join('')}
+                </div>
+            </a>
+        `;
+                container.appendChild(item);
+            });
+            updateCount();
+        }
+
+
+        function updateCount() {
+            const shown = Math.min(itemsToShow, totalItems);
+            countText.textContent = `${shown} / ${totalItems}`;
+            if (shown >= totalItems) loadMoreBtn.style.display = 'none';
+        }
+
+        loadMoreBtn.addEventListener('click', () => {
+            itemsToShow = Math.min(itemsToShow + 8, totalItems);
+            renderProducts();
+        });
+
+        // 최초 렌더
+        renderProducts();
+
+        // 기존 위시리스트 토글 기능
+        function toggleBookmark(img) {
+            const defaultIcon = 'assets/icons/즐겨찾기1.png';
+            const activeIcon = 'assets/icons/즐겨찾기2.png';
+            const panel = document.getElementById('wishlist-panel');
+            const currentSrc = img.getAttribute('src');
+
+            if (currentSrc.includes('즐겨찾기1.png')) {
+                img.setAttribute('src', activeIcon);
+                const item = img.closest('.product-item');
+                const name = item.querySelector('.list-name-wrap p').textContent;
+                const productImgUrl = item.querySelector('.list-img img').src;
+                const panelContent = document.getElementById('wishlist-content');
+                panelContent.innerHTML = `
+                    <div class="wishlist-item">
+                        <img src="${productImgUrl}" alt="${name}">
+                        <p>"${name}"이(가) 위시리스트에 저장되었습니다</p>
+                    </div>`;
+                panel.classList.add('show');
+                clearTimeout(panel._hideTimeout);
+                panel._hideTimeout = setTimeout(() => panel.classList.remove('show'), 3000);
+            } else {
+                img.setAttribute('src', defaultIcon);
+                clearTimeout(panel._hideTimeout);
+                panel.classList.remove('show');
+            }
+        }
+
+        document.getElementById('wishlist-close').addEventListener('click', () => {
+            const panel = document.getElementById('wishlist-panel');
+            clearTimeout(panel._hideTimeout);
+            panel.classList.remove('show');
+        });
