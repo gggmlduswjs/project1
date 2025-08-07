@@ -1,88 +1,146 @@
+/* ===== 전체 초기화 ===== */
 * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 
     body {
       font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f3f4f6;
     }
 
-    header {
-      width: 100vw;
-      height: 70px;
-      background-color: black;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 60px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 999;
-    }
+/* ===== 헤더 공통 ===== */
+header {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
 
-    nav {
-      display: flex;
-      gap: 25px;
-    }
+nav {
+  display: flex;
+  gap: 30px;
+}
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 13px;
-      letter-spacing: 1px;
-      font-weight: 400;
-    }
+nav a {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: opacity 0.3s ease;
+}
 
-    .logo {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        align-items: center;  /* 수직 정렬 */
-        justify-content: center;
-        height: 70px;
-    }
+nav a:hover {
+  opacity: 0.7;
+}
 
-    .logo img {
-    height: 30px; /* 원본 로고에 맞게 조절 */
-    object-fit: contain;
-    }
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;
+}
 
-    .utility {
-      display: flex;
-      gap: 20px;
-    }
+.logo img {
+  height: 32px;
+  object-fit: contain;
+  max-height: 100%;
+}
 
-    .utility img {
-      width: 18px;
-      height: 18px;
-      filter: brightness(0) invert(1);
-      opacity: 0.8;
-    }
+/* ===== 헤더 우측 아이콘 ===== */
+.utility {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+}
 
-    .utility a:hover img {
-      opacity: 1;
-    }
+.utility img {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
 
+.utility a:hover img {
+  opacity: 1;
+}
 
+/* ===== 페이지별 헤더 스타일 ===== */
 
+/* 메인 페이지 - 초기 상태 (투명 배경 + 흰 글씨) */
+body.main-page header {
+  background: transparent;
+  color: white;
+}
 
-    .gn-footer {
+body.main-page header .logo img,
+body.main-page header nav a,
+body.main-page header .utility img {
+  filter: brightness(0) invert(1);
+  color: white;
+}
+
+/* 메인 페이지 - 스크롤 후 (흰 배경 + 검정 글씨) */
+body.main-page.scrolled header {
+  background: rgba(255, 255, 255, 0.95);
+  color: black;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+body.main-page.scrolled header .logo img,
+body.main-page.scrolled header .utility img {
+  filter: none;
+}
+
+body.main-page.scrolled header nav a {
+  color: black;
+}
+
+/* 서브 페이지 (흰 배경 + 검정 글씨, position static) */
+body.sub-page header {
+  position: static;
+  background: rgba(255, 255, 255, 0.95);
+  color: black;
+  backdrop-filter: blur(10px);
+}
+
+body.sub-page header nav a,
+body.sub-page header .utility img {
+  color: black;
+  filter: none;
+}
+
+/* ===== 푸터 ===== */
+footer {
+  font-size: 0.8rem;
+  background-color: #f7f8f9;
+  border-top: 1px solid #e0e0e0;
+  padding: 40px 60px;
+}
+
+.gn-footer {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  background-color: #f7f8f9;
-  padding: 40px 60px;
-  font-size: 13px;
-  line-height: 1.7;
-  color: #444;
-  border-top: 1px solid #e0e0e0;
+  flex-wrap: wrap;
 }
 
 .footer-left {
-  max-width: 80%;
+  flex: 1 1 70%;
 }
 
 .footer-menu {
@@ -99,12 +157,8 @@
   font-size: 13px;
 }
 
-.footer-menu a strong {
-  font-weight: bold;
-}
-
 .footer-info {
-  font-size: 11px;
+  font-size: 12px;
   color: #777;
 }
 
@@ -114,8 +168,46 @@
 }
 
 .footer-right {
-  font-size: 12px;
-  color: #000;
+  flex: 1 1 30%;
+  text-align: right;
+  font-size: 13px;
   font-weight: bold;
+  color: #000;
   white-space: nowrap;
+  min-width: 160px; 
+}
+
+/* ===== 반응형 (Tablet 이하) ===== */
+@media screen and (max-width: 768px) {
+  header {
+    padding: 0 24px;
+  }
+
+  nav {
+    gap: 16px;
+  }
+
+  nav a {
+    font-size: 14px;
+  }
+
+  .utility img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .logo img {
+    height: 26px;
+  }
+
+  .gn-footer {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-right {
+    text-align: left;
+    white-space: normal;
+    margin-top: 10px;
+  } 
 }
