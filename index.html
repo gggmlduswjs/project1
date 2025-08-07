@@ -5,16 +5,196 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gentle Monster Clone</title>
   <link rel="stylesheet" href="./assets/css/style.css">
+  <style>
+    /* 전체 풀스크린 섹션 */
+
+.fullscreen-slide {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+}
+
+/* 슬라이드 컨테이너 */
+.slide-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 각 슬라이드 (비디오 또는 이미지) */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 0;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* 비디오 & 이미지 */
+.slide video,
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 텍스트 + 버튼 */
+.slide-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 2;
+}
+
+.slide-text h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.slide-text button {
+  padding: 12px 24px;
+  margin: 0 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.slide-text button:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+/* 슬라이드 하단 네비게이션 점 */
+.slide-nav {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 3;
+}
+
+.slide-nav .dot {
+  width: 100px;
+  height: 3px;
+  /* border-radius: 50%; */
+  border-bottom: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.slide-nav .dot.active {
+  background-color: white;
+}
+
+
+#brand-stroy{
+  width: 100%;
+  height: 80vh;
+  margin-top: 80vh;
+}
+
+#products{
+  width: 100%;
+  height: 80vh;
+}
+
+  </style>
 </head>
-<body>
+<body class="main-page">
 
   <div id="header"></div>
 
+  <section id="main-visual" class="fullscreen-slide">
+
+    <div class="slide-container">
+      <div class="slide">
+        <video src="./assets/videos/main.mp4" autoplay muted loop></video>
+      </div>
+      <div class="slide">
+        <img src="./assets/main/image_2.jpg" alt="슬라이드 이미지2">
+      </div>
+      <div class="slide">
+        <img src="./assets/main/image_3.jpg" alt="슬라이드 이미지3">
+      </div>
+      <div class="slide">
+        <video src="./assets/videos/main2.mp4" autoplay muted loop></video>
+      </div>
+    </div>
+
+    <div class="slide-nav">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </section>
+
+
+  <section id="brand-stroy"></section>
+
+  <section id="products"></section>
 
   <div id="footer"></div>
 
 
   <script src="./assets/js/common.js"></script>
 
+  <script>
+    // 슬라이드 관련 변수
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let current = 0;
+    let slideInterval;
+
+    // 슬라이드 활성화 함수
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+        dots[i].classList.toggle('active', i === index);
+      });
+      current = index;
+    }
+
+    // 다음 슬라이드로 전환
+    function nextSlide() {
+      let next = (current + 1) % slides.length;
+      showSlide(next);
+    }
+
+    // 자동 슬라이드 시작
+    function startSlide() {
+      slideInterval = setInterval(nextSlide, 5000); // 5초마다 슬라이드 전환
+    }
+
+    // 슬라이드 하단 점 클릭 이벤트 등록
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        showSlide(index);
+        clearInterval(slideInterval); // 수동 클릭 시 자동 슬라이드 멈춤
+        startSlide(); // 다시 시작
+      });
+    });
+
+    // 초기 실행
+    showSlide(0);
+    startSlide();
+
+  </script>
+ 
 </body>
 </html>

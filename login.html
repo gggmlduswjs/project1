@@ -4,20 +4,67 @@
 <head>
   <meta charset="UTF-8">
   <title>로그인&회원가입 - Gentlemonster</title>
+
+  <link href="/assets/css/style.css" rel="stylesheet">
+
+
+
+
   <style>
     body {
       background: #fafbfc;
       font-family: 'Noto Sans KR', Arial, sans-serif;
+      r
     }
 
+
+
     .container {
+
       width: 440px;
-      margin: 50px auto;
+      margin: 100px auto;
       background: #fff;
       border: 2px solid #888;
       border-radius: 18px;
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
       padding: 25px 30px 14px 30px;
+    }
+
+    .container .login-header {
+      display: flex !important;
+      position: static !important;
+      top: auto !important;
+      left: auto !important;
+      width: 100% !important;
+      height: auto !important;
+      background: none !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      padding: 0 !important;
+      margin-bottom: 34px !important;
+      box-shadow: none !important;
+      z-index: auto !important;
+    }
+
+    .container .login-header .logo {
+      position: static !important;
+      left: auto !important;
+      transform: none !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      height: auto !important;
+      background: none !important;
+    }
+
+    .container .login-header .gentle-logo {
+      height: 18px !important;
+      object-fit: contain !important;
+    }
+
+    .container .login-header .gentle-logo {
+      height: 18px !important;
+      object-fit: contain !important;
     }
 
     .login-header {
@@ -223,6 +270,37 @@
 </head>
 
 <body>
+  <div id="header">
+    <header>
+      <!-- 네비 메뉴, 로고, 유틸리티 ... -->
+      <!-- 좌측 메뉴 -->
+      <nav>
+        <a href="../product.html">선글라스</a>
+        <a href="#">안경 ^^</a>
+        <a href="#">컬렉션</a>
+        <a href="#">스토어</a>
+        <a href="#">더 알아보기</a>
+      </nav>
+
+      <!-- 가운데 로고 -->
+      <div class="logo">
+        <img src="./assets/logo/logo1.png">
+      </div>
+
+      <!-- 우측 아이콘 -->
+      <div class="utility">
+        <a href="../search.html"><img src="./assets/icons/search1.png" alt="검색"></a>
+        <a href="../login.html"><img src="./assets/icons/mypage1.png" alt="마이페이지"></a>
+        <a href="../cart.html"><img src="./assets/icons/cart1.png" alt="장바구니"></a>
+      </div>
+    </header>
+  </div>
+
+
+
+
+
+
   <!-- 전체박스 -->
   <div class="container">
     <!-- header -->
@@ -251,7 +329,7 @@
       </div>
       <div class="social-login">
         <button type="button" class="btn-naver">
-          <img src="./assets/login_logo/naver2.png" alt=" alt=" 네이버 로고" class="sns-logo">
+          <img src="./assets/login_logo/naver2.png" alt="네이버 로고" class="sns-logo">
           네이버로 로그인
         </button>
         <button type="button" class="btn-google">
@@ -275,6 +353,17 @@
       </div>
     </footer>
   </div>
+
+
+
+
+  <div id="footer">
+
+  </div>
+  <script src="./assets/js/common.js"></script>
+
 </body>
+
+
 
 </html>

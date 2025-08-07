@@ -26,8 +26,8 @@ const products = [  // 위시리스트에서 사용하기 위해 전역변수로
 //위시리스트 배열
 const wishlist = [];
 
-// renderDiv() : 장바구니 상품 리스트 그리기
-function renderDiv() {
+// 장바구니 렌더링
+function renderCart() {
     const list = document.getElementById("cart-list");
     list.innerHTML = "";
 
@@ -47,7 +47,7 @@ function renderDiv() {
         li.innerHTML = `
                 <div class = "list-item">
                    
-                    <div><input type="checkbox" class = "cb" data-index = "${index}"></div>
+                    <div><input type="checkbox" class = "cb" data-index = "${index}" checked></div>
                     <div><img class = "list-item-img" src="${item.img}" alt="${item.title}"></div>
                     
                     <div>
@@ -172,13 +172,13 @@ function allitemDelete() {
             products.splice(i, 1);
         }
     }
-    renderDiv();
+    renderCart();
 }
 
 //장바구니 개별 상품 삭제
 function itemDelete(index) {
     products.splice(index, 1);
-    renderDiv();
+    renderCart();
 }
 
 //위시리스트 js - 성빈님
@@ -204,14 +204,14 @@ function toggleBookmark(img) {
         item.color === wishproduct.color
     );
 
-    if (index === -1) { // 없으면 추가
+    if (index === -1) { // 추가
         wishlist.push(wishproduct);
         img.setAttribute('src', activeIcon);
         updateWishCount();
         wishlisttitle.textContent = "위시리스트에 저장되었습니다";
         hiddenWish(wishproduct, "이(가) 위시리스트에 저장되었습니다.");
     }
-    else { // 있으면 제거
+    else { // 제거
         wishlist.splice(index, 1);
         img.setAttribute('src', defaultIcon);
         updateWishCount();
@@ -220,36 +220,24 @@ function toggleBookmark(img) {
     }
 }
 
-//위시리스트 숨김 창
-function hiddenWish(wishproduct, message) {
-    const panel = document.getElementById('wishlist-panel');
-    const panelContent = document.getElementById('wishlist-content');
 
-    panelContent.innerHTML = `
-                    <div class="wishlist-item">
-                        <img src="${wishproduct.img}" alt="${wishproduct.title}">
-                        <p>"${wishproduct.title}"${message}</p>
-                    </div>`;
-
-    panel.classList.add('show');
-    clearTimeout(panel._hideTimeout);
-    panel._hideTimeout = setTimeout(() => panel.classList.remove('show'), 3000);
-}
-
-//위시리스트 구현
+//위시리스트 렌더링
 function renderWish() {
-    const list = document.getElementById("cart-list");
-    list.innerHTML = "";
+    const wishlistWrap = document.getElementById("wishlist-wrap");
+    const cartWrap = document.getElementById("cart-wrap");
+
+    cartWrap.style.display = "none";
+    wishlistWrap.style.display = "block";
+    wishlistWrap.innerHTML = "";
 
     // 위시리스트가 비었을 때
     if (wishlist.length === 0) {
-        list.innerHTML = `
-                    <div id="cart-list">
-                        <p style='text-align:center; padding:50px 0; font-size:18px; margin-top:130px;'>
-                            위시리스트에 저장된 제품이 없습니다.
-                        </p>
-                    </div>
-                    `;
+        wishlistWrap.innerHTML = `
+                <p style='text-align:center; padding:50px 0; font-size:18px; margin-top:200px;'>
+                    위시리스트에 저장된 제품이 없습니다.
+                </p>
+                <div class="wish-btn"><a href="./index.html"><button>쇼핑 계속하기</button></a></div>
+                `;
         updateWishCount();
         return;
     }
@@ -257,44 +245,75 @@ function renderWish() {
     // 리스트 생성
     const ul = document.createElement("ul");
     ul.classList.add("cart-list-ul");
+    ul.classList.add("wish-item");
 
     wishlist.forEach(function (item, index) {
         const li = document.createElement("li");
         li.innerHTML = `
-            <div class="list-item">
-                <div><img class="list-item-img" src="${item.img}" alt="${item.title}"></div>
-                <div>
+                <div class = "item-box-style">
+                    <img class="list-item-img" src="${item.img}" alt="${item.title}">
                     <p>${item.title}</p>
-                    <p class="item-color">${item.color || ''}</p>
+                    <p class="item-color" style = "margin-bottom:10px;">${item.color || ''}</p>
+                    <button class="item-delete" onclick="deleteWishlistItem(this)">북마크 취소</button>
                 </div>
-                <div class="count-delete">
-                    <button class="item-delete" onclick="deleteWishlistItem(${index})">북마크 취소</button>
-                </div>
-            </div>
-            `;
+                `;
         ul.appendChild(li);
     });
 
-    list.appendChild(ul);
+    wishlistWrap.appendChild(ul);
     updateWishCount();
+
 }
 
-//메뉴 버튼 실행
+//위시리스트 숨김 창
+function hiddenWish(wishproduct, message) {
+    const panel = document.getElementById('wishlist-panel');
+    const panelContent = document.getElementById('wishlist-content');
+
+    panelContent.innerHTML = `
+                        <div class="wishlist-item">
+                            <img src="${wishproduct.img}" alt="${wishproduct.title}">
+                            <p>"${wishproduct.title}"${message}</p>
+                        </div>`;
+    panel.classList.add('show');
+    clearTimeout(panel._hideTimeout);
+    panel._hideTimeout = setTimeout(() => panel.classList.remove('show'), 3000);
+}
+
+//위시리스트 삭제
+function deleteWishlistItem(button) {
+    const li = button.closest("li");
+    const img = li.querySelector(".list-item-img").getAttribute("src");
+    const title = li.querySelector("p").textContent;
+    const color = li.querySelector(".item-color").textContent;
+    
+    const index = wishlist.findIndex(item =>
+        item.img === img && item.title === title && item.color === color
+    );
+    
+    if (index !== -1) {
+        wishlist.splice(index, 1);
+    }
+    
+    renderWish();
+}
+
+//메뉴 버튼 실행 시 동작
 function showCart() {
-    renderDiv();
-    document.getElementById("cart-buy-wrap").classList.remove("hidden");
-    document.querySelector(".cart-all-delete").classList.remove("hidden");
+    document.getElementById("cart-wrap").style.display = "block";
+    document.getElementById("wishlist-wrap").style.display = "none";
+    renderCart();
 }
 
 function showWish() {
+    document.getElementById("cart-wrap").style.display = "none";
+    document.getElementById("wishlist-wrap").style.display = "block";
     renderWish();
-    document.getElementById("cart-buy-wrap").classList.add("hidden");
-    document.querySelector(".cart-all-delete").classList.add("hidden");
 }
 
 //윈도우 로드 시
 window.onload = function () {
-    renderDiv();
+    renderCart();
 
     //위시리스트 닫기
     document.getElementById('wishlist-close').addEventListener('click', () => {
