@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>회원가입</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
   <style>
     body {
       background: #fafbfc;
@@ -11,8 +12,8 @@
     }
 
     .signup-container {
-      width: 380px;
-      margin: 40px auto;
+      width: 440px;
+      margin: 100px auto;
       background: #fff;
       border: 1.5px solid #aaa;
       border-radius: 13px;
@@ -102,6 +103,36 @@
 </head>
 
 <body>
+
+  <div id="header">
+    <header>
+      <!-- 네비 메뉴, 로고, 유틸리티 ... -->
+      <!-- 좌측 메뉴 -->
+      <nav>
+        <a href="../product.html">선글라스</a>
+        <a href="#">안경</a>
+        <a href="#">컬렉션</a>
+        <a href="#">스토어</a>
+        <a href="#">더 알아보기</a>
+      </nav>
+
+      <!-- 가운데 로고 -->
+      <div class="logo">
+        <img src="./assets/logo/logo1.png">
+      </div>
+
+      <!-- 우측 아이콘 -->
+      <div class="utility">
+        <a href="../search.html"><img src="./assets/icons/search1.png" alt="검색"></a>
+        <a href="../login.html"><img src="./assets/icons/mypage1.png" alt="마이페이지"></a>
+        <a href="../cart.html"><img src="./assets/icons/cart1.png" alt="장바구니"></a>
+      </div>
+    </header>
+  </div>
+
+  </div>
+
+
   <div class="signup-container">
     <h2>회원가입</h2>
     <form id="signupForm" autocomplete="off">
@@ -191,6 +222,35 @@
       // 폼 초기화 등 후처리 추가 가능
     });
   </script>
+
+
+  <div id="footer">
+    <footer class="gn-footer">
+      <div class="footer-left">
+        <div class="footer-menu">
+          <a href="#">문의하기</a>
+          <a href="#">고객 서비스</a>
+          <a href="#">스토어 찾기</a>
+          <a href="#">법적 고지</a>
+          <a href="#">개인정보 처리방침</a>
+          <a href="#">구독하기</a>
+          <a href="#">소셜</a>
+          <a href="#">국가: <strong>South Korea</strong></a>
+        </div>
+        <div class="footer-info">
+          ㈜ 아이아이컴바인드 | 대표자명: 김한국 | 사업자등록번호: 119-86-38589 | 통신판매신고번호: 제 2016-서울마포-1050호(사업자 정보 확인)<br />
+          이메일 문의: <a href="mailto:service.kr@gentlemonster.com">service.kr@gentlemonster.com</a> | 개인정보보호책임자: 황재익 | 주소:
+          서울특별시 마포구 어울마당로5길 41 | 대표번호: 1600-2126
+        </div>
+      </div>
+      <div class="footer-right">
+        © 2025 GENTLE MONSTER
+      </div>
+    </footer>
+  </div>
+
+  <script src="./assets/js/common.js"></script>
+
 </body>
 
 </html>

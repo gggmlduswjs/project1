@@ -1,5 +1,8 @@
 // 공통 header/footer 삽입
 window.addEventListener("DOMContentLoaded", () => {
+
+
+  console.log("dfdfdfd")
   fetch("/components/header.html")
     .then((res) => res.text())
     .then((data) => {
