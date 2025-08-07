@@ -44,18 +44,23 @@ function handleHeaderAfterLoad() {
   }
 
   // 📄 서브페이지일 경우 항상 다크 아이콘
-  if (document.body.classList.contains("sub-page")) {
-    switchToDarkIcons();
-  }
+if (document.body.classList.contains("sub-page")) {
+  switchToDarkIcons();
+}
 
-  // 🏠 메인페이지일 경우 스크롤에 따라 바뀜
-  if (document.body.classList.contains("main-page")) {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
-        switchToDarkIcons();
-      } else {
-        switchToLightIcons();
-      }
-    });
-  }
+// 🏠 메인페이지일 경우 스크롤에 따라 아이콘 색상 변경
+if (document.body.classList.contains("main-page")) {
+  const secondSection = document.querySelector("#brand-stroy");
+
+  window.addEventListener("scroll", () => {
+    const secondSectionTop = secondSection.getBoundingClientRect().top;
+
+    if (secondSectionTop <= 0) {
+      switchToDarkIcons();  // 두 번째 섹션이 화면 상단에 닿으면 다크
+    } else {
+      switchToLightIcons(); // 그 위에 있을 땐 라이트
+    }
+  });
+}
+
 }
