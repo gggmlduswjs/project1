@@ -32,6 +32,7 @@ nav {
 }
 
 nav a {
+  color: #000;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
@@ -59,6 +60,7 @@ nav a:hover {
   max-height: 100%;
 }
 
+/* 검색창 */
 .search-layer {
   position: fixed;
   top: 0;
@@ -181,11 +183,14 @@ body.main-page header .logo img,
 body.main-page header nav a,
 body.main-page header .utility img {
   filter: brightness(0) invert(1);
-  color: white;
+  /* color: white; */
 }
-body.main-page header.dark-mode nav a {
+
+header.dark-mode nav a {
   color: black !important;
 }
+
+
 /* 메인 페이지 - 스크롤 후 (흰 배경 + 검정 글씨) */
 body.main-page.scrolled header {
   background: rgba(255, 255, 255, 0.95);
