@@ -221,7 +221,8 @@
       justify-content: space-between;
       align-items: center;
       border-top: 1.5px solid #bbb;
-      padding: 19px 0 5px 0;
+      margin-right: ;
+      padding: 19px 5px 0;
       margin-top: 38px;
       font-size: 14px;
       color: #444;
@@ -255,11 +256,14 @@
           return;
         }
 
-        // 아이디/비번 일치
         if (id === validId && pw === validPw) {
           msg.textContent = "로그인 성공!";
           msg.style.color = "#188f19";
-          // 실제 서비스에선 이동, 세션 처리 등 추가
+
+          // ✅ 1초 후 메인페이지로 이동
+          setTimeout(() => {
+            window.location.href = './index.html'; // 원하는 경로로 수정 가능
+          }, 1000); // 1초 후 이동
         } else {
           msg.textContent = "아이디 또는 비밀번호가 올바르지 않습니다.";
           msg.style.color = "#d72d2d";
@@ -269,7 +273,7 @@
   </script>
 </head>
 
-<body>
+<body class="sub-page">
   <div id="header">
     <header>
       <!-- 네비 메뉴, 로고, 유틸리티 ... -->

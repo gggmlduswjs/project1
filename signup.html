@@ -54,9 +54,10 @@
 
     .btn-dup-check {
       padding: 7px 13px;
-      border: 1px solid #009688;
-      background: #e9f7f6;
-      color: #009688;
+      margin-top: 4px;
+      border: 1px solid;
+      background-color: white;
+      background: black color: #009688;
       border-radius: 7px;
       cursor: pointer;
       font-size: 14px;
@@ -88,8 +89,7 @@
       height: 42px;
       border-radius: 8px;
       border: none;
-      background: #2b8fee;
-      color: #fff;
+      background: black color: #fff;
       font-weight: bold;
       font-size: 17px;
       margin-top: 6px;
@@ -102,7 +102,7 @@
   </style>
 </head>
 
-<body>
+<body class="sub-page">
 
   <div id="header">
     <header>
@@ -220,6 +220,9 @@
       msg.classList.add('success');
       // 여기서 실제 서비스라면 서버에 데이터 전송(ajax, fetch 등)
       // 폼 초기화 등 후처리 추가 가능
+      setTimeout(() => {
+        window.location.href = './login.html'; // 로그인 페이지 경로
+      }, 500);
     });
   </script>
 
