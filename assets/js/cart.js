@@ -33,7 +33,8 @@ function renderCart() {
 
     //장바구니가 비어있을 때
     if (products.length === 0) {
-        list.innerHTML = "<p style='text-align:center; padding:50px 0; font-size:18px; margin-top:130px;'>쇼핑백에 추가된 제품이 없습니다.</p>";
+        list.innerHTML = `<p style='text-align:center; padding:50px 0; font-size:18px; margin-top:130px;'>쇼핑백에 추가된 제품이 없습니다.</p>
+                        <div class="wish-btn"><a href="./index.html"><button>쇼핑 계속하기</button></a></div>`;
         updateCartCount();
         totalPrice();
         return;
@@ -47,7 +48,7 @@ function renderCart() {
         li.innerHTML = `
                 <div class = "list-item">
                    
-                    <div><input type="checkbox" class = "cb" data-index = "${index}" checked></div>
+                    <div><input type="checkbox" class = "cb" data-index = "${index}"></div>
                     <div><img class = "list-item-img" src="${item.img}" alt="${item.title}"></div>
                     
                     <div>
