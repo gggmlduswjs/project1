@@ -50,13 +50,13 @@ section {
 }
 
 .cart-close {
-    width: 25px;
-    height: 25px;
-    background-image: url(./assets/icons/cart-close.png);
+    width: 30px;
+    height: 30px;
+    background-image: url('/assets/icons/close-btn.png');
     background-position: center;
     background-size: cover;
     position: absolute;
-    right: 20px;
+    right: 40px;
 }
 
 /*장바구니 전체 css*/
