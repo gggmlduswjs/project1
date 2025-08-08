@@ -86,12 +86,12 @@ function handleHeaderAfterLoad() {
     switchToDarkIcons();
   }
 
-  // ✅ 검색 열기 버튼
+  // 검색 열기 버튼
   if (searchBtn) {
     searchBtn.addEventListener("click", openSearch);
   }
 
-  // ✅ 검색 닫기 버튼
+  // 검색 닫기 버튼
   if (closeBtn) {
     closeBtn.addEventListener("click", closeSearch);
   }

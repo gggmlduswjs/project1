@@ -61,9 +61,15 @@
 
     /* 하단 썸네일 목록 */
     .product-list {
+
+       
       display: flex;
       overflow-x: auto;
       gap: 20px;
+      position: absolute;
+      bottom: -850px;
+      left: 50%;
+      transform: translate(-50%,-50%); /*x,y*/
 
       width: 1200px;
       margin: 0 auto;
