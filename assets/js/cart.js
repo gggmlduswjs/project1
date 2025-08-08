@@ -28,6 +28,7 @@ const wishlist = [];
 
 // 장바구니 렌더링
 function renderCart() {
+    //화면 지우고 시작
     const list = document.getElementById("cart-list");
     list.innerHTML = "";
 
@@ -223,12 +224,8 @@ function toggleBookmark(img) {
 
 //위시리스트 렌더링
 function renderWish() {
+    //화면 지우고 시작
     const wishlistWrap = document.getElementById("wishlist-wrap");
-    const cartWrap = document.getElementById("cart-wrap");
-
-    //화면 전환
-    cartWrap.style.display = "none";
-    wishlistWrap.style.display = "block";
     wishlistWrap.innerHTML = "";
 
     // 위시리스트가 비었을 때
