@@ -24,45 +24,61 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// 🔧 헤더가 삽입된 후에 작동시켜야 할 기능들
 function handleHeaderAfterLoad() {
   const logo = document.getElementById("logo-img");
   const icons = document.querySelectorAll(".icon-img");
 
-  if (!logo || icons.length < 3) return;
+  console.log("✅ 헤더 로딩 후 실행됨");
+  console.log("✅ logo:", logo);
+  console.log("✅ icons.length:", icons.length);
+
+  if (!logo || icons.length < 3) {
+    console.log("❌ logo 또는 icons 못 찾음");
+    return;
+  }
 
   function switchToDarkIcons() {
-    logo.src = "./assets/logo/logo2.png";
-    icons[0].src = "./assets/icons/search2.png";
-    icons[1].src = "./assets/icons/mypage2.png";
-    icons[2].src = "./assets/icons/cart2.png";
+    console.log("▶️ switchToDarkIcons 실행");
+    logo.src = "/assets/logo/logo2.png";
+    icons[0].src = "/assets/icons/search2.png";
+    icons[1].src = "/assets/icons/mypage2.png";
+    icons[2].src = "/assets/icons/cart2.png";
   }
 
   function switchToLightIcons() {
-    logo.src = "./assets/logo/logo1.png";
-    icons[0].src = "./assets/icons/search1.png";
-    icons[1].src = "./assets/icons/mypage1.png";
-    icons[2].src = "./assets/icons/cart1.png";
+    console.log("▶️ switchToLightIcons 실행");
+    logo.src = "/assets/logo/logo1.png";
+    icons[0].src = "/assets/icons/search1.png";
+    icons[1].src = "/assets/icons/mypage1.png";
+    icons[2].src = "/assets/icons/cart1.png";
   }
 
-  // 📄 서브페이지일 경우 항상 다크 아이콘
-if (document.body.classList.contains("sub-page")) {
-  switchToDarkIcons();
-}
+  const body = document.body;
 
-// 🏠 메인페이지일 경우 스크롤에 따라 아이콘 색상 변경
-if (document.body.classList.contains("main-page")) {
-  const secondSection = document.querySelector("#brand-story");
+  // 서브페이지는 무조건 다크
+  if (body.classList.contains("sub-page")) {
+    switchToDarkIcons();
+  }
 
-  window.addEventListener("scroll", () => {
-    const secondSectionTop = secondSection.getBoundingClientRect().top;
+  // 메인 페이지: 스크롤 이벤트로 아이콘/클래스 변경
+  if (body.classList.contains("main-page")) {
+    const onScroll = () => {
+      const scrollY = window.scrollY;
 
-    if (secondSectionTop <= 0) {
-      switchToDarkIcons();  // 두 번째 섹션이 화면 상단에 닿으면 다크
-    } else {
-      switchToLightIcons(); // 그 위에 있을 땐 라이트
-    }
-  });
-}
+      if (scrollY > 300) {
+        if (!body.classList.contains("scrolled")) {
+          body.classList.add("scrolled");
+          switchToDarkIcons();
+        }
+      } else {
+        if (body.classList.contains("scrolled")) {
+          body.classList.remove("scrolled");
+          switchToLightIcons();
+        }
+      }
+    };
 
+    window.addEventListener("scroll", onScroll);
+    onScroll(); // 페이지 로드시도 초기화
+  }
 }

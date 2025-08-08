@@ -1,0 +1,94 @@
+/* 전체 풀스크린 섹션 */
+
+.section1 {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+}
+
+/* 슬라이드 컨테이너 */
+.slide-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* 각 슬라이드 (비디오 또는 이미지) */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 0;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* 비디오 & 이미지 */
+.slide video,
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 텍스트 + 버튼 */
+.slide-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 2;
+}
+
+.slide-text h2 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.slide-text button {
+  padding: 12px 24px;
+  margin: 0 10px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.slide-text button:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+/* 슬라이드 하단 네비게이션 점 */
+.slide-nav {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;
+  z-index: 3;
+}
+
+.slide-nav .dot {
+  width: 100px;
+  height: 3px;
+  /* border-radius: 50%; */
+  border-bottom: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.slide-nav .dot.active {
+  background-color: white;
+}
