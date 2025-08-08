@@ -1,3 +1,4 @@
+ 
 // 🔄 헤더/푸터 불러오기
 document.addEventListener("DOMContentLoaded", () => {
   const header = document.getElementById("header");
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // 헤더 로딩 후 실행할 기능
       handleHeaderAfterLoad();
+ 
     });
 
   // 푸터 삽입

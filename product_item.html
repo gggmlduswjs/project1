@@ -4,31 +4,123 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gentle Monster Clone</title>
+    <title>Gentle Monster item</title>
 
     <link rel="stylesheet" href="./assets/css/style.css">
 
     <style>
-        /* 메인사진부분 */
-        .item-wrap-img{
+        /* 상품이미지 영역 */
+        .item-wrap-img {
+            width: 900px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            gap: 20px;
+
+            min-height: 1200px;
+        }
+
+        .item-wrap-img img {
+            width: 100%;
+            border-radius: 6px;
+        }
+
+        /* 오른쪽 사이드바 - 화면 오른쪽 고정 */
+        .item-wrap-add {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            width: 300px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            height: fit-content;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* 색상 버튼 */
+        .color-btn {
+            border: none;
+            margin-right: 5px;
+            margin-top: 10px;
+            width: 20px;
+            height: 20px;
+        }
+
+        /* 추가하기 버튼 */
+        .add-button {
+            width: 100%;
+            height: 40px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: black;
+            color: white;
+            font-size: 12px;
+        }
+
+        /* 사이드바 설명 영역 */
+        .accordion {
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 10px;
+        }
+
+        .accordion-header {
+            font-weight: bold;
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
-        .item-wrap-img img{
-            width: 900px;
+
+        .accordion-content {
+            padding: 10px;
+            padding-bottom: 20px;
+            display: none;
+            font-size: 13px;
+            color: rgb(71, 71, 71);
+        }
+
+        .accordion.open .accordion-content {
+            display: block;
+        }
+
+        .icon::before {
+            content: "+";
+            font-size: 18px;
+        }
+
+        .accordion.open .icon::before {
+            content: "-";
+            font-size: 18px;
+        }
+
+        /* 캠페인 영역 */
+        .item-campaign {
+            margin-top: 80px;
+            padding: 10px;
+    
+        }
+        .item-campaign-img{
+            display: flex;
+            justify-content: space-between;
+            margin-left: 40px;
+             margin-right: 40px;
+        }
+        .item-campaign-img img{
+            width: 400px;
             height: auto;
-            object-fit: cover;
+            
         }
-
-        /* 사이드바 */
-        .item-wrap-add{
-            width: 300px;
-            height: 350px;
-            border: 1px solid black;
+        .item-campaign-info{
+            padding: 10px;
+            margin-left: 40px;
         }
-
+        .item-campaign-info h4, p{
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -36,39 +128,186 @@
 
     <!-- 헤더 -->
     <div id="header"></div>
-        
 
-    <section style="background-color: #f3f4f6;">
-        <div class="item-wrap-img">
-                <img src="./assets/product_item/상품샷1.avif" alt="상품샷1">
-                <img src="./assets/product_item/상품샷2.avif" alt="상품샷2">
-                <img src="./assets/product_item/상품샷3.avif" alt="상품샷3">
-                <img src="./assets/product_item/상품샷4.avif" alt="상품샷4">
-                <img src="./assets/product_item/상품샷5.avif" alt="상품샷5">
-                <img src="./assets/product_item/상품샷6.avif" alt="상품샷6">
-                <img src="./assets/product_item/상품샷7.avif" alt="상품샷7">
-            </div>
-            
-        </div>
-        <div class="item-campaign">
-            <div class="item-campaign-img"></div>
-            <div class="item-campaign-info"></div>
-        </div>
-        <div class="item-shop">
-            <div class="item-shop-title"></div>
-            <div class="item-shop-img"></div>
-        </div>
-
-        <div class="item-wrap-add">
-            </div>
+    <!-- 메인 이미지 영역 -->
+    <section>
+        <div class="item-wrap-img" id="imageContainer"><!-- 이미지추가영역 --></div>
     </section>
 
+    <!-- 오른쪽 고정 사이드바 -->
+    <div class="item-wrap-add">
+        <h4 id="productName">던스 01</h4>
+        <p style="font-size: 12px; margin-top: 5px;">₩340,000</p>
+        <button class="color-btn" data-index="0" style="background: black;"></button>
+        <button class="color-btn" data-index="1"
+            style="background: linear-gradient(-45deg, black 30%, white );"></button>
+        <button class="color-btn" data-index="2"
+            style="background: linear-gradient(-45deg, rgb(87, 23, 23) 50%, rgb(190, 255, 190) );"></button>
+        <button class="color-btn" data-index="3"
+            style="background: linear-gradient(-45deg, black 30%, rgb(255, 49, 83) );"></button>
+        <button class="add-button">쇼핑백에 추가하기</button>
 
-     <!-- 푸터 -->
-     <div id="footer"></div>
+        <!-- 설명창 -->
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                무료 배송 & 반품 <span class="icon"></span>
+            </div>
+            <div class="accordion-content">
+                젠틀몬스터 공식 온라인 스토어는 무료 배송 및 반품 서비스를 제공합니다.<br>
+                반품은 제품을 수령하신 날로부터 7일 이내에 접수해 주셔야 합니다.<br>
+                제품은 사용되지 않은 상태여야 하며, 모든 구성품을 포함하고 있어야 합니다.
+            </div>
+        </div>
 
-     <script src="./assets/js/common.js"></script>
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                세부 정보 <span class="icon"></span>
+            </div>
+            <div class="accordion-content">
+                현대적인 감각의 그린 아세테이트 소재의 캣아이 프레임 선글라스<br>
+                2025 컬렉션<br>
+                그린 아세테이트 프레임<br>
+                브라운 렌즈<br>
+                캣아이 쉐입<br>
+                제조자 및 수입자: IICOMBINED CO., LTD.<br>
+                제조국명: 중국
+            </div>
+        </div>
 
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                사이즈 및 핏 <span class="icon"></span>
+            </div>
+            <div class="accordion-content">
+                렌즈 너비: 53.5 mm<br>
+                브릿지: 21 mm<br>
+                프레임 프론트: 147.2 mm<br>
+                템플 길이: 146.3 mm<br>
+                렌즈 높이: 33.3 mm<br>
+            </div>
+        </div>
+    </div>
+
+    <!-- 캠페인 영역 -->
+    <div class="item-campaign">
+        <div class="item-campaign-img">
+            <div>
+                <img src="./assets/product_item/캠페인1.jpg" alt="캠페인1 이미지">
+            </div>
+            <div>
+                <img src="./assets/product_item/캠페인2.jpg" alt="캠페인2 이미지">
+            </div>
+            <div>
+                <img src="./assets/product_item/캠페인3.jpg" alt="캠페인3 이미지">
+            </div>
+            <div>
+                <img src="./assets/product_item/캠페인4.jpg" alt="캠페인4 이미지">
+            </div>
+        </div>
+        <div class="item-campaign-info">
+            <h4>캠페인</h4>
+            <p>젠틀몬스터의 2025 주얼리 컬렉션을 소개합니다. 이번 컬렉션은 아이웨어와 주얼리를 결합하는 시도를 통해,<br>
+                아이웨어의 개념을 확장하고 새로운 미학적 영역으로 확장합니다.</p>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <div id="footer"></div>
+
+    <script src="./assets/js/common.js"></script>
+    <script>
+
+        function toggleAccordion(header) {
+            const parent = header.parentElement;
+            parent.classList.toggle('open');
+        }
+
+        const productVariants = [
+            {
+                name: "던스 01 블랙",
+                images: [
+                    "./assets/product_item/상품샷1.avif",
+                    "./assets/product_item/상품샷2.avif",
+                    "./assets/product_item/상품샷3.avif",
+                    "./assets/product_item/상품샷4.avif",
+                    "./assets/product_item/상품샷5.avif",
+                    "./assets/product_item/상품샷6.avif",
+                    "./assets/product_item/상품샷7.avif"
+                ]
+            },
+            {
+                name: "던스 W2",
+                images: [
+                    "./assets/product_item/상품샷2-1.avif",
+                    "./assets/product_item/상품샷2-2.avif",
+                    "./assets/product_item/상품샷2-3.avif",
+                    "./assets/product_item/상품샷2-4.avif",
+                    "./assets/product_item/상품샷2-5.avif",
+                    "./assets/product_item/상품샷2-6.avif"
+                ]
+            },
+            {
+                name: "던스 GR9",
+                images: [
+                    "./assets/product_item/상품샷3-1.avif",
+                    "./assets/product_item/상품샷3-2.avif",
+                    "./assets/product_item/상품샷3-3.avif",
+                    "./assets/product_item/상품샷3-4.avif",
+                    "./assets/product_item/상품샷3-5.avif"
+                ]
+            },
+            {
+                name: "던스 R6",
+                images: [
+                    "./assets/product_item/상품샷4-1.avif",
+                    "./assets/product_item/상품샷4-2.avif",
+                    "./assets/product_item/상품샷4-3.avif",
+                    "./assets/product_item/상품샷4-4.avif",
+                    "./assets/product_item/상품샷4-5.avif"
+                ]
+            }
+        ];
+
+        const imageContainer = document.getElementById("imageContainer");
+        const productName = document.getElementById("productName");
+        const colorButtons = document.querySelectorAll(".color-btn");
+
+        function updateProductDisplay(index) {
+            const variant = productVariants[index];
+            productName.textContent = variant.name;
+
+            // 새 이미지들 로드 준비
+            const tempFragment = document.createDocumentFragment();
+            let loadedCount = 0;
+            const total = variant.images.length;
+
+            variant.images.forEach(src => {
+                const img = new Image();
+                img.src = src;
+
+                img.onload = img.onerror = () => {
+                    loadedCount++;
+                    if (loadedCount === total) {
+                        imageContainer.innerHTML = "";
+                        imageContainer.appendChild(tempFragment);
+                    }
+                };
+
+                tempFragment.appendChild(img);
+            });
+        }
+
+        // 버튼 클릭 이벤트 연결
+        colorButtons.forEach((btn, i) => {
+            btn.dataset.index = i;
+            btn.addEventListener("click", () => updateProductDisplay(i));
+        });
+
+        // 첫 렌더링
+        window.addEventListener("DOMContentLoaded", () => {
+            updateProductDisplay(0);
+        });
+    </script>
 
 </body>
 
