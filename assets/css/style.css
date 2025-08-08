@@ -59,6 +59,97 @@ nav a:hover {
   max-height: 100%;
 }
 
+.search-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  background: rgba(255,255,255,0.96); /* 💡 불투명 흰배경으로 보기 쉽게 */
+  z-index: 999; /* 💡 최상단으로 */
+  display: none;  /* JS가 flex로 바꿔줌 */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px;
+}
+
+.search{
+  border-bottom: 1px solid #000000;
+  width: 700px;
+  text-align: center;
+  color: #111;
+  margin-bottom: 50px;
+  /* background: rgba(255,255,255,0.96); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.search input {
+  width: 90%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: none;
+  list-style: none;
+  background-color: none;
+  
+  /* background-color: rgba(255,255,255,0.96); */
+}
+
+.search img {
+  /* display: inline-block; */
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.search-content {
+  position: relative;
+}
+
+
+.search-content .popular ul {
+  list-style: none;
+  margin-top: 10px;
+  display: flex;
+
+  justify-content: space-around;
+}
+
+
+
+.search-content .popular p {
+  font-size: 14px;
+  margin: 4px 0;
+}
+.search-content .popular li img {
+  width: 100px;
+  height: 100px;
+  
+}
+
+.choice {
+  display: flex;
+  justify-content: space-between;
+  margin: 50px 0;
+}
+
+.close {
+  position: absolute;
+
+  top: -50px;
+  right: -550px;
+}
+
+.close img {
+  width: 15px;
+  height: 15px;
+}
+
+
 /* ===== 헤더 우측 아이콘 ===== */
 .utility {
   display: flex;
@@ -92,7 +183,9 @@ body.main-page header .utility img {
   filter: brightness(0) invert(1);
   color: white;
 }
-
+body.main-page header.dark-mode nav a {
+  color: black !important;
+}
 /* 메인 페이지 - 스크롤 후 (흰 배경 + 검정 글씨) */
 body.main-page.scrolled header {
   background: rgba(255, 255, 255, 0.95);
@@ -109,6 +202,7 @@ body.main-page.scrolled header .utility img {
 body.main-page.scrolled header nav a {
   color: black;
 }
+
 
 /* 서브 페이지 (흰 배경 + 검정 글씨, position static) */
 body.sub-page header {
@@ -176,6 +270,8 @@ footer {
   white-space: nowrap;
   min-width: 160px; 
 }
+
+
 
 /* ===== 반응형 (Tablet 이하) ===== */
 @media screen and (max-width: 768px) {

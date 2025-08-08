@@ -43,6 +43,10 @@
       color: #777;
     }
 
+    .slide_text a {
+        color: black;
+    }
+
 
     .slide-item img {
       width: 100%;
