@@ -52,7 +52,7 @@ if (document.body.classList.contains("sub-page")) {
 
 // 🏠 메인페이지일 경우 스크롤에 따라 아이콘 색상 변경
 if (document.body.classList.contains("main-page")) {
-  const secondSection = document.querySelector("#brand-stroy");
+  const secondSection = document.querySelector("#brand-story");
 
   window.addEventListener("scroll", () => {
     const secondSectionTop = secondSection.getBoundingClientRect().top;
