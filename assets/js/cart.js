@@ -1,10 +1,10 @@
 // 장바구니 배열
-const products = [  // 위시리스트에서 사용하기 위해 전역변수로 사용
+const products = [ 
     {
         img: "./assets/products/product1.jpg",
         title: "레이디 랭 RC",
         color: "블랙 / 브라운",
-        price: 289000,         //계산용
+        price: 289000,       
         qty: 1
     },
     {
@@ -28,12 +28,14 @@ const wishlist = [];
 
 // 장바구니 렌더링
 function renderCart() {
+    //화면 지우고 시작
     const list = document.getElementById("cart-list");
     list.innerHTML = "";
 
-    //장바구니가 비어있을 때
+    //장바구니 비어있을 때
     if (products.length === 0) {
-        list.innerHTML = "<p style='text-align:center; padding:50px 0; font-size:18px; margin-top:130px;'>쇼핑백에 추가된 제품이 없습니다.</p>";
+        list.innerHTML = `<p style='text-align:center; padding:50px 0; font-size:18px; margin-top:130px;'>쇼핑백에 추가된 제품이 없습니다.</p>
+                        <div class="wish-btn"><a href="./index.html"><button>쇼핑 계속하기</button></a></div>`;
         updateCartCount();
         totalPrice();
         return;
@@ -46,28 +48,23 @@ function renderCart() {
         const li = document.createElement("li");
         li.innerHTML = `
                 <div class = "list-item">
-                   
-                    <div><input type="checkbox" class = "cb" data-index = "${index}" checked></div>
+                    <div><input type="checkbox" class = "cb" data-index = "${index}"></div>
                     <div><img class = "list-item-img" src="${item.img}" alt="${item.title}"></div>
-                    
                     <div>
                         <p>${item.title}</p>
                         <p class = "item-color">${item.color}</p>
                         <p class = "amt">₩ ${item.price.toLocaleString()}</p>
                     </div>
-
                     <div class = "count-delete">
                         수량 <select class="count-select" onchange="calPrice(this, ${index})">
                                     ${[...Array(5)].map((_, i) => `
                                         <option value="${i + 1}" ${item.qty === i + 1 ? 'selected' : ''}>${i + 1}</option>
                                     `).join("")}
-                        </select>
+                            </select>
                         <div class = "item-delete-wrap"><button onclick= "itemDelete(${index})" class="item-delete">삭제하기</button></div>
                     </div>
-
                     <div><img src = "./assets/icons/즐겨찾기1.png" art = "북마크" class="bookmark-icon" data-index="${index}" style = "width:25px; height:25px; cursor:pointer;"></div>
-                </div>
-                `;
+                </div>`;
         ul.appendChild(li);
     });
     list.appendChild(ul);
@@ -82,21 +79,21 @@ function renderCart() {
 
     //북마크
     const bookmark = document.querySelectorAll(".bookmark-icon");
-
+    //북마크 이벤트
     bookmark.forEach(function (icon) {
         icon.addEventListener("click", function () {
             toggleBookmark(this);
         });
     });
-
 }
 
 //체크박스 이벤트
 function checkBoxListener() {
-    const allcb = document.querySelector(".all_cb");
+    const allCb = document.querySelector(".all_cb");
     const checkBoxes = document.querySelectorAll(".cb");
 
-    checkBoxes.forEach(cb => {  //개별 체크박스 변경 시
+    //개별 체크박스 변경 시
+    checkBoxes.forEach(cb => {   
         cb.addEventListener("change", function () {
             let allChecked = true;
             checkBoxes.forEach(function (box) {
@@ -104,13 +101,14 @@ function checkBoxListener() {
                     allChecked = false;
                 }
             });
-            allcb.checked = allChecked;
+            allCb.checked = allChecked;
             totalPrice();
         });
     });
 
-    allcb.addEventListener("change", function () {    //전체 체크박스 변경 시
-        checkBoxes.forEach(cb => cb.checked = allcb.checked);
+    //전체 체크박스 변경 시
+    allCb.addEventListener("change", function () {    
+        checkBoxes.forEach(cb => cb.checked = allCb.checked);
         totalPrice();
     });
 }
@@ -118,20 +116,21 @@ function checkBoxListener() {
 //수량 변경 시 금액 변경
 function calPrice(selectTag, index) {
     let qty = parseInt(selectTag.value);
-    products[index].qty = qty;  // 배열의 상품 수량 변경
+    products[index].qty = qty;          // 배열의 상품 수량 변경
 
     const li = selectTag.closest("li");
     li.querySelector(".amt").textContent = "₩ " + (products[index].price * qty).toLocaleString();
 
-    totalPrice();   //총계 갱신
+    totalPrice();     //총계 갱신
 }
 
 //총계
 function totalPrice() {
     let sum = 0;
+    const checkBoxes = document.querySelectorAll(".cb");
 
-    //체크 되어있을 때 
-    document.querySelectorAll(".cb").forEach((cb, i) => {
+    //체크 되어있을 때만 총계 계산
+    checkBoxes.forEach((cb, i) => {
         if (cb.checked) {
             sum += products[i].qty * products[i].price;
         }
@@ -151,7 +150,7 @@ function updateCartCount() {
     cartcount.textContent = products.length;
 }
 
-//위시리스트 개수 업데이트
+//위시리스트 담긴 개수 업데이트
 function updateWishCount() {
     const wishcount = document.querySelector(".wish-count");
     wishcount.textContent = wishlist.length;
@@ -159,16 +158,17 @@ function updateWishCount() {
 
 //장바구니 전체 삭제
 function allitemDelete() {
-    const allcb = document.querySelector(".all_cb");
-    const checkBoxs = document.querySelectorAll(".cb");
+    const allCb = document.querySelector(".all_cb");
+    const checkBoxes = document.querySelectorAll(".cb");
 
-    if (!allcb.checked) {
+    //체크박스가 모두 선택 시
+    if (!allCb.checked) {
         alert("전체 선택 체크 박스를 먼저 체크해주세요.");
         return;
     }
 
-    for (let i = checkBoxs.length - 1; i >= 0; i--) {
-        if (checkBoxs[i].checked) {
+    for (let i = checkBoxes.length - 1; i >= 0; i--) {
+        if (checkBoxes[i].checked) {
             products.splice(i, 1);
         }
     }
@@ -181,7 +181,7 @@ function itemDelete(index) {
     renderCart();
 }
 
-//위시리스트 js - 성빈님
+//위시리스트 숨겨진 창
 function toggleBookmark(img) {
     const defaultIcon = './assets/icons/즐겨찾기1.png';
     const activeIcon = './assets/icons/즐겨찾기2.png';
@@ -199,23 +199,24 @@ function toggleBookmark(img) {
     };
 
     const index = wishlist.findIndex(item =>
-        item.img === wishproduct.img &&
-        item.title === wishproduct.title &&
-        item.color === wishproduct.color
+        //북마크 클릭 상품 -> 위시리스트 존재 여부
+        item.img === wishproduct.img && item.title === wishproduct.title && item.color === wishproduct.color
     );
 
-    if (index === -1) { // 추가
-        wishlist.push(wishproduct);
+    if (index === -1) {   // 추가
+        wishlist.push(wishproduct);    
         img.setAttribute('src', activeIcon);
         updateWishCount();
         wishlisttitle.textContent = "위시리스트에 저장되었습니다";
+
         hiddenWish(wishproduct, "이(가) 위시리스트에 저장되었습니다.");
     }
-    else { // 제거
+    else {                // 제거
         wishlist.splice(index, 1);
         img.setAttribute('src', defaultIcon);
         updateWishCount();
         wishlisttitle.textContent = "위시리스트에서 제거되었습니다";
+
         hiddenWish(wishproduct, "이(가) 위시리스트에서 제거되었습니다.");
     }
 }
@@ -223,11 +224,8 @@ function toggleBookmark(img) {
 
 //위시리스트 렌더링
 function renderWish() {
+    //화면 지우고 시작
     const wishlistWrap = document.getElementById("wishlist-wrap");
-    const cartWrap = document.getElementById("cart-wrap");
-
-    cartWrap.style.display = "none";
-    wishlistWrap.style.display = "block";
     wishlistWrap.innerHTML = "";
 
     // 위시리스트가 비었을 때
@@ -236,18 +234,17 @@ function renderWish() {
                 <p style='text-align:center; padding:50px 0; font-size:18px; margin-top:200px;'>
                     위시리스트에 저장된 제품이 없습니다.
                 </p>
-                <div class="wish-btn"><a href="./index.html"><button>쇼핑 계속하기</button></a></div>
-                `;
+                <div class="wish-btn"><a href="./index.html"><button>쇼핑 계속하기</button></a></div>`;
         updateWishCount();
         return;
     }
 
-    // 리스트 생성
+    // 위시리스트 생성
     const ul = document.createElement("ul");
     ul.classList.add("cart-list-ul");
     ul.classList.add("wish-item");
 
-    wishlist.forEach(function (item, index) {
+    wishlist.forEach(function (item) {
         const li = document.createElement("li");
         li.innerHTML = `
                 <div class = "item-box-style">
@@ -255,8 +252,7 @@ function renderWish() {
                     <p>${item.title}</p>
                     <p class="item-color" style = "margin-bottom:10px;">${item.color || ''}</p>
                     <button class="item-delete" onclick="deleteWishlistItem(this)">북마크 취소</button>
-                </div>
-                `;
+                </div>`;
         ul.appendChild(li);
     });
 
@@ -275,6 +271,7 @@ function hiddenWish(wishproduct, message) {
                             <img src="${wishproduct.img}" alt="${wishproduct.title}">
                             <p>"${wishproduct.title}"${message}</p>
                         </div>`;
+
     panel.classList.add('show');
     clearTimeout(panel._hideTimeout);
     panel._hideTimeout = setTimeout(() => panel.classList.remove('show'), 3000);
@@ -298,6 +295,7 @@ function deleteWishlistItem(button) {
     renderWish();
 }
 
+
 //메뉴 버튼 실행 시 동작
 function showCart() {
     document.getElementById("cart-wrap").style.display = "block";
@@ -311,7 +309,7 @@ function showWish() {
     renderWish();
 }
 
-//윈도우 로드 시
+//윈도우 로드 (초기 실행)
 window.onload = function () {
     renderCart();
 
@@ -322,7 +320,7 @@ window.onload = function () {
         panel.classList.remove('show');
     });
 
-    //부가정보
+    //부가정보 js
     const toggleBtn = document.querySelectorAll('.toggle-btn');
     toggleBtn.forEach(btn => {
         btn.addEventListener('click', () => {

@@ -5,121 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gentle Monster Clone</title>
   <link rel="stylesheet" href="./assets/css/style.css">
-  <style>
-    /* 전체 풀스크린 섹션 */
+  <link rel="stylesheet" href="./assets/css/section1.css">
+  <link rel="stylesheet" href="./assets/css/section2.css">
+  <link rel="stylesheet" href="./assets/css/section3.css">
 
-.fullscreen-slide {
-  position: relative;
-  width: 100%;
-  height: 80vh;
-  overflow: hidden;
-}
-
-/* 슬라이드 컨테이너 */
-.slide-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-/* 각 슬라이드 (비디오 또는 이미지) */
-.slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 0.8s ease-in-out;
-  z-index: 0;
-}
-
-.slide.active {
-  opacity: 1;
-  z-index: 1;
-}
-
-/* 비디오 & 이미지 */
-.slide video,
-.slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* 텍스트 + 버튼 */
-.slide-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  text-align: center;
-  z-index: 2;
-}
-
-.slide-text h2 {
-  font-size: 48px;
-  margin-bottom: 20px;
-}
-
-.slide-text button {
-  padding: 12px 24px;
-  margin: 0 10px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
-}
-
-.slide-text button:hover {
-  background-color: rgba(255, 255, 255, 1);
-}
-
-/* 슬라이드 하단 네비게이션 점 */
-.slide-nav {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 12px;
-  z-index: 3;
-}
-
-.slide-nav .dot {
-  width: 100px;
-  height: 3px;
-  /* border-radius: 50%; */
-  border-bottom: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.slide-nav .dot.active {
-  background-color: white;
-}
-
-
-#brand-stroy{
-  width: 100%;
-  height: 80vh;
-  margin-top: 80vh;
-}
-
-#products{
-  width: 100%;
-  height: 80vh;
-}
-
-  </style>
 </head>
 <body class="main-page">
 
   <div id="header"></div>
 
-  <section id="main-visual" class="fullscreen-slide">
+  <section class="section1">
 
     <div class="slide-container">
       <div class="slide">
@@ -145,56 +40,72 @@
   </section>
 
 
-  <section id="brand-story"></section>
+ <section class="section2" style="height: 1200px;">
+    <!-- 상단 슬라이드 -->
+    <div class="slide-container" id="slideContainer">
+      <!-- 슬라이드 항목들이 JS로 들어감 -->
+    </div>
 
-  <section id="products"></section>
+    <!-- 하단 썸네일 목록 -->
+    <div class="product-list" id="productList">
+      <!-- 상품 썸네일이 JS로 들어감 -->
+    </div>
+  </section>
+
+
+
+  <section class="section-best">
+  <div class="title-row">
+    <h2>TOP 20 베스트셀러</h2>
+    <a href="#">더보기</a>
+  </div>
+
+  <div class="product-row">
+    <!-- 상품 반복 요소 -->
+    <div class="product">
+      <div class="product-img" style="background-image: url('./assets/main/image_95.jpg');"></div>
+      <p class="name">던스 01</p>
+      <p class="price">₩340,000</p>
+    </div>
+    
+    <div class="product">
+      <div class="product-img" style="background-image: url('./assets/main/image_96.jpg');"></div>
+      <p class="name">던스 01</p>
+      <p class="price">₩340,000</p>
+    </div>
+    <div class="product">
+      <div class="product-img" style="background-image: url('./assets/main/image_97.jpg');"></div>
+      <p class="name">던스 01</p>
+      <p class="price">₩340,000</p>
+    </div>
+    <div class="product">
+      <div class="product-img" style="background-image: url('./assets/main/image_98.jpg');"></div>
+      <p class="name">던스 01</p>
+      <p class="price">₩340,000</p>
+    </div>
+    <div class="product">
+      <div class="product-img" style="background-image: url('./assets/main/image_99.jpg');"></div>
+      <p class="name">던스 01</p>
+      <p class="price">₩340,000</p>
+    </div>
+
+    <!-- 나머지 3개도 같은 구조 반복 -->
+  </div>
+</section>
+
 
   <div id="footer"></div>
 
 
-  <script src="./assets/js/common.js"></script>
+  
+  <script src="./assets/js/section1.js"></script>
+  <script src="./assets/js/section2.js"></script>
+  <script src="./assets/js/common.js" defer></script>
+  <!-- <script src="./assets/js/section3.js"></script> -->
 
-  <script>
-    // 슬라이드 관련 변수
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let current = 0;
-    let slideInterval;
+  
 
-    // 슬라이드 활성화 함수
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
-        dots[i].classList.toggle('active', i === index);
-      });
-      current = index;
-    }
-
-    // 다음 슬라이드로 전환
-    function nextSlide() {
-      let next = (current + 1) % slides.length;
-      showSlide(next);
-    }
-
-    // 자동 슬라이드 시작
-    function startSlide() {
-      slideInterval = setInterval(nextSlide, 5000); // 5초마다 슬라이드 전환
-    }
-
-    // 슬라이드 하단 점 클릭 이벤트 등록
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => {
-        showSlide(index);
-        clearInterval(slideInterval); // 수동 클릭 시 자동 슬라이드 멈춤
-        startSlide(); // 다시 시작
-      });
-    });
-
-    // 초기 실행
-    showSlide(0);
-    startSlide();
-
-  </script>
+  
  
 </body>
 </html>

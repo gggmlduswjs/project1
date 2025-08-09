@@ -6,7 +6,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>젠틀몬스터 클론</title>
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="../assets/css/style.css">
+  
 </head>
 
 <body class="main-page">
@@ -26,20 +27,64 @@
     <!-- 중앙 로고 -->
     <div class="logo">
       <a href="../index.html">
-        <img id="logo-img" src="../assets/logo/logo1.png" alt="로고" />
+        <img id="logo-img" src="/assets/logo/logo1.png" alt="로고" />
       </a>
     </div>
 
     <!-- 우측 아이콘 -->
     <div class="utility">
-      <a href="../search.html"><img class="icon-img" src="../assets/icons/search1.png" alt="검색" /></a>
-      <a href="../login.html"><img class="icon-img" src="../assets/icons/mypage1.png" alt="마이페이지" /></a>
-      <a href="../cart.html"><img class="icon-img" src="../assets/icons/cart1.png" alt="장바구니" /></a>
+      <a href="javascript:void(0)" onclick="openSearch()">
+        <img class="icon-img" src="/assets/icons/search1.png" alt="검색" />
+      </a>
+      <a href="../login.html"><img class="icon-img" src="/assets/icons/mypage1.png" alt="마이페이지" /></a>
+      <a href="../cart.html"><img class="icon-img" src="/assets/icons/cart1.png" alt="장바구니" /></a>
     </div>
   </header>
-  <!-- ✅ 헤더 끝 -->
 
+
+  <!-- 검색 레이어 -->
+<div id="searchLayer" class="search-layer" style="display: none;">
+  <div class="search-content">
+    <div class="search">
+        <img src="../assets/icons/search2.png">
+        <input type="text" placeholder="검색어를 입력하세요" />
+    </div>
+    <div class="popular">
+      <p>인기 검색어</p>
+      <ul>
+        <li>
+          <img src="../assets/main/image_107.jpg">
+          <p>미트 01</p>
+          
+        </li>
+        <li>
+          <img src="../assets/main/image_108.jpg">
+          <p>코코아 BRC11</p>
+        </li>
+        <li>
+          <img src="../assets/main/image_109.jpg">
+          <p>데이즈 데이 01(V)</p>
+        </li>
+        <li>
+          <img src="../assets/main/image_110.jpg">
+          <p>쿤스트 01GD</p>
+        </li>
+        <li>
+          <img src="../assets/main/image_111.jpg">
+          <p>티트라 02(BRM)</p>
+        </li>
+      </ul>
+    </div>
+    <p class="close"><a href="javascript:void(0)" onclick="closeSearch()"><img src="../assets/icons/cart-close.png"></a></p>
+    <div class="choice">
+      <p>최근 본 제품</p>
+      <p>삭제하기</p>
+    </div>
+</div>
+  </div>
+  <script src="../assets/js/common.js" defer></script>
 </body>
+
 
 
 </html>
