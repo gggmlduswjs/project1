@@ -76,7 +76,6 @@ function renderCart() {
     //체크박스 이벤트
     checkBoxListener();
 
-
     //북마크
     const bookmark = document.querySelectorAll(".bookmark-icon");
     //북마크 이벤트
@@ -116,7 +115,7 @@ function checkBoxListener() {
 //수량 변경 시 금액 변경
 function calPrice(selectTag, index) {
     let qty = parseInt(selectTag.value);
-    products[index].qty = qty;          // 배열의 상품 수량 변경
+    products[index].qty = qty;              // 배열의 상품 수량 변경
 
     const li = selectTag.closest("li");
     li.querySelector(".amt").textContent = "₩ " + (products[index].price * qty).toLocaleString();
@@ -244,14 +243,14 @@ function renderWish() {
     ul.classList.add("cart-list-ul");
     ul.classList.add("wish-item");
 
-    wishlist.forEach(function (item) {
+    wishlist.forEach(function (item, index) {
         const li = document.createElement("li");
         li.innerHTML = `
                 <div class = "item-box-style">
                     <img class="list-item-img" src="${item.img}" alt="${item.title}">
                     <p>${item.title}</p>
                     <p class="item-color" style = "margin-bottom:10px;">${item.color || ''}</p>
-                    <button class="item-delete" onclick="deleteWishlistItem(this)">북마크 취소</button>
+                    <button class="item-delete" onclick="deleteWishlistItem(${index})">북마크 취소</button>
                 </div>`;
         ul.appendChild(li);
     });
@@ -259,6 +258,12 @@ function renderWish() {
     wishlistWrap.appendChild(ul);
     updateWishCount();
 
+}
+
+//위시리스트 삭제
+function deleteWishlistItem(index) {
+    wishlist.splice(index, 1);    
+    renderWish();
 }
 
 //위시리스트 숨김 창
@@ -275,24 +280,6 @@ function hiddenWish(wishproduct, message) {
     panel.classList.add('show');
     clearTimeout(panel._hideTimeout);
     panel._hideTimeout = setTimeout(() => panel.classList.remove('show'), 3000);
-}
-
-//위시리스트 삭제
-function deleteWishlistItem(button) {
-    const li = button.closest("li");
-    const img = li.querySelector(".list-item-img").getAttribute("src");
-    const title = li.querySelector("p").textContent;
-    const color = li.querySelector(".item-color").textContent;
-    
-    const index = wishlist.findIndex(item =>
-        item.img === img && item.title === title && item.color === color
-    );
-    
-    if (index !== -1) {
-        wishlist.splice(index, 1);
-    }
-    
-    renderWish();
 }
 
 
